@@ -31,12 +31,14 @@ public class MainActivity extends AppCompatActivity {
         txt = (TextView) findViewById(R.id.textView);
         btn = (Button) findViewById(R.id.button);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
         btnX = btn.getTranslationX();
         btnY = btn.getTranslationY();
-        final int width = dm.widthPixels/2 + 2*btn.getWidth();
-        final int height = dm.heightPixels/2 + 2*btn.getHeight();
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        final int width = (int) (dm.widthPixels/1.6 - 2*btn.getHeight());
+        final int height = (int) ( dm.heightPixels/1.6 -  2*btn.getHeight());
 
         View.OnClickListener ourOnClickListener = new View.OnClickListener() {
             @Override
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 txt.setText(result);
-
 
                 Random r = new Random();
                 int top = r.nextInt(height) + btn.getHeight();
@@ -89,10 +90,11 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Toast toastMessage = Toast.makeText(this, "The count has now been reset" , Toast.LENGTH_LONG);
-
+            toastMessage.show();
 
             count = 0;
             txt.setText("The button was tapped " + count + " times");
+
 
             btn.setTranslationX(btnX);
             btn.setTranslationY(btnY);
