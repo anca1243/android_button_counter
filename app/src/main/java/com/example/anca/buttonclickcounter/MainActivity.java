@@ -7,7 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;
     private TextView txt;
     private int count = 0;
-    private ViewGroup.LayoutParams initLayout;
+    private float btnX;
+    private float btnY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        initLayout = btn.getLayoutParams();
-
+        btnX = btn.getTranslationX();
+        btnY = btn.getTranslationY();
         final int width = dm.widthPixels/2 + 2*btn.getWidth();
         final int height = dm.heightPixels/2 + 2*btn.getHeight();
 
@@ -95,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             count = 0;
             txt.setText("The button was tapped " + count + " times");
 
+            btn.setTranslationX(btnX);
+            btn.setTranslationY(btnY);
             return true;
         }
 
